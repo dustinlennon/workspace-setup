@@ -2,13 +2,13 @@
 
 SOURCE_PATH=$(pwd)
 INSTALL_PATH=${INSTALL_PATH:-$HOME/Workspace}
-fileset=(create.sh workspace.functions)
 
 mkdir -p ${INSTALL_PATH}/Sandbox
 mkdir -p ${INSTALL_PATH}/Active
 mkdir -p ${INSTALL_PATH}/Journal
 
-# create links
+# create link(s)
+fileset=( create.sh )
 for file in "${fileset[@]}"; do
 	link=${INSTALL_PATH}/${file}
 
