@@ -31,3 +31,4 @@ Dependencies
 
 ### bash-function-library
 
+[repo](https://github.com/dustinlennon/bash-function-library)
