@@ -7,7 +7,7 @@ sandbox_name="Sandbox/${project_name}"
 journal_name="Journal/$(printf "%(%Y-%m)T").${project_name}"
 active_name="Active/${project_name}"
 
-git_auth() {
+github_auth() {
 	GH_TOKEN=$(gh auth token)
 	err_code=$?
 	if [ $err_code -ne 0 ]; then
@@ -23,7 +23,7 @@ git_auth() {
 	export GH_TOKEN
 }
 
-git_create_remote_repo() {
+github_create_remote_repo() {
 	IFS='' read -r -d '' json <<-EOF
 	{
 	  'name': '${project_name}',
@@ -71,9 +71,9 @@ if [ ! -d "$sandbox_name" ]; then
     echo creating directory $sandbox_name
     mkdir $sandbox_name
 	pushd $sandbox_name
-	git_auth
-	git_create_remote_repo
-	git_create_local_repo
+		github_auth
+		github_create_remote_repo
+		git_create_local_repo
 	popd
 fi
 
