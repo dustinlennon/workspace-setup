@@ -1,5 +1,11 @@
 #!/bin/bash
 
+GIT_CREATE_REPO=true
+if [ "$1" = "--no-git" ]; then
+	GIT_CREATE_REPO=false
+	shift
+fi
+
 source ${BFL}/process_args
 process_args project_name -- "$@" || exit $?
 
@@ -68,12 +74,14 @@ git_create_local_repo() {
 }
 
 if [ ! -d "$sandbox_name" ]; then
-    echo creating directory $sandbox_name
-    mkdir $sandbox_name
+	echo creating directory $sandbox_name
+	mkdir $sandbox_name
 	pushd $sandbox_name
+	if [ "$GIT_CREATE_REPO" = true ]; then
 		github_auth
 		github_create_remote_repo
 		git_create_local_repo
+	fi
 	popd
 fi
 
